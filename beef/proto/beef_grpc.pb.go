@@ -26,10 +26,7 @@ const (
 // BeefServiceClient is the client API for BeefService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// Define the Beef service
 type BeefServiceClient interface {
-	// A function to get all beef with no request data, and only a response
 	GetAllBeef(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetAllBeefResponse], error)
 }
 
@@ -63,10 +60,7 @@ type BeefService_GetAllBeefClient = grpc.ServerStreamingClient[GetAllBeefRespons
 // BeefServiceServer is the server API for BeefService service.
 // All implementations must embed UnimplementedBeefServiceServer
 // for forward compatibility.
-//
-// Define the Beef service
 type BeefServiceServer interface {
-	// A function to get all beef with no request data, and only a response
 	GetAllBeef(*empty.Empty, grpc.ServerStreamingServer[GetAllBeefResponse]) error
 	mustEmbedUnimplementedBeefServiceServer()
 }

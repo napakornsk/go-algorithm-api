@@ -5,6 +5,9 @@ CLIENT_DIR = client
 SERVER_BIN = ${BIN_DIR}/server
 CLIENT_BIN = ${BIN_DIR}/client
 
+DECODER_PROTO_DIR = decoder/proto
+
+
 # Define platform-specific commands
 ifeq ($(OS), Windows_NT)
 	SHELL := powershell.exe
@@ -34,6 +37,11 @@ build: ## Generate Pbs and build the Beef service
 		exit 1; \
 	fi
 
+build_decoder: ## Generate Pbs and build the Beef service
+	@echo "Building decoder server and client..."
+	@set -e  # Exit immediately if a command fails
+	protoc -I${DECODER_PROTO_DIR} --go_opt=module=$(shell go list -m) --go_out=. --go-grpc_opt=module=$(shell go list -m) --go-grpc_out=. ${DECODER_PROTO_DIR}/*.proto
+
 # Target to clean generated files
 clean: ## Clean up generated files
 	@echo "Cleaning up..."
@@ -54,6 +62,13 @@ run_client: ## Run the Beef client
 run_restapi: ## Run the rest api
 	go run _cmd/main.go
 
+# Run the rest api
+run_decoder_client: ## Run the rest api
+	go run decoder/client/.
+# Run the rest api
+run_decoder_server: ## Run the rest api
+	go run decoder/server/.
+
 
 # Display basic help information
 help: ## Show this help
@@ -63,3 +78,4 @@ help: ## Show this help
 	@echo "  clean          - Clean generated files"
 	@echo "  run_server     - Run the Beef server"
 	@echo "  run_client     - Run the Beef client"
+	@echo "  build_decoder     - Generate the decoder protobuf files and build server/client"
