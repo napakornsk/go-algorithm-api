@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/golang/protobuf/ptypes/empty"
-	beef "github.com/napakornsk/go-algorithm-api/beef/proto"
+	beef "github.com/napakornsk/go-algorithm-api/proto"
 	"google.golang.org/grpc"
 )
 

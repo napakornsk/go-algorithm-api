@@ -4,7 +4,7 @@ import (
 	"log"
 	"net"
 
-	beef "github.com/napakornsk/go-algorithm-api/beef/proto"
+	beef "github.com/napakornsk/go-algorithm-api/proto"
 	"google.golang.org/grpc"
 )
 
