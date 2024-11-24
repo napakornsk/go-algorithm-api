@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 
@@ -43,9 +44,14 @@ func (s *BeefService) GetBeefMap(c *gin.Context) {
 	beefMap := make(map[string]int32)
 	for {
 		res, err := stream.Recv()
-		if err != nil {
+
+		if err == io.EOF {
 			break
 		}
+		if err != nil {
+			fmt.Printf("error while receiving from stream: %v\n", err)
+		}
+
 		amount, isFound := beefMap[res.Data]
 		if isFound {
 			beefMap[res.Data] = amount + 1

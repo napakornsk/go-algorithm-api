@@ -51,7 +51,7 @@ clean: ## Clean up generated files
 # Target to run the server
 run_server: ## Run the Beef server
 	@echo "Running Beef server..."
-	go run ./beef/server/.
+	./beef/bin/server
 
 # Target to run the client
 run_client: ## Run the Beef client
@@ -68,6 +68,9 @@ run_decoder_client: ## Run the rest api
 # Run the rest api
 run_decoder_server: ## Run the rest api
 	go run decoder/server/.
+
+build_server:
+	go build -o ./beef/bin/server ./beef/server/.
 
 
 # Display basic help information

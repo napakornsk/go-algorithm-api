@@ -35,13 +35,15 @@ func (s *BeefServiceServer) GetAllBeef(req *empty.Empty, stream grpc.ServerStrea
 	}
 	words := strings.Fields(res)
 
+	fmt.Println("Sending beef through stream...")
 	for _, w := range words {
 		if err := stream.Send(&beef.GetAllBeefResponse{
 			Data: strings.Trim(w, ",."),
 		}); err != nil {
-			return fmt.Errorf("failed to send word throuh stream: %v", err)
+			return fmt.Errorf("failed to a beef word through stream: %v", err)
 		}
 	}
+	fmt.Println("SUCCESS: all beef have been sent through stream")
 
 	return nil
 }
